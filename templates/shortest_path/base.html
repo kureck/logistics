@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Bootstrap -->
+        <link href="{% static 'css/bootstrap-fluid-adj.css' %}" rel="stylesheet">
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+        <link href="{% static 'css/bootstrap-responsive.css' %}" rel="stylesheet">
+        <link href="{% static 'css/bootstrap-theme.min.css' %}" rel="stylesheet">
+        <title>Walmart Logistics - {% block title %} {% endblock %}</title>
+    </head>
+
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="/shortest_path/">Home</a>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="well sidebar-nav">
+                        <!--- Empty for the timebeing -->
+                        <ul>
+                            <li><a href="/shortest_path/maps/">Mapas</a></li>
+                            <li><a href="/shortest_path/create_map/">Criar Mapa</a></li>
+                        </ul>
+                    </div>
+                    <!--/.well -->
+                </div>
+                <!--/span-->
+                <div class="col-md-9">
+                    {% block body_block %}{% endblock %}
+                </div>
+                <!--/span-->
+            </div>
+            <!--/row-->
+        </div>
+        <!--/.fluid-container-->
+
+        <hr>
+        <footer>
+            <div class="container">
+                <p>&copy; Walmart Logistics 2014</p>
+            </div>
+        </footer>
+        <script src="{% static 'js/jquery-2.1.1.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/script.js' %}"></script>
+    </body>
+</html> 

@@ -9,4 +9,5 @@ urlpatterns = patterns('',
 	# url(r'^blog/', include('blog.urls')),
 	url(r'^$', include('shortest_path.urls', namespace="shortest_path")),
 	url(r'^admin/', include(admin.site.urls)),
+	url(r'^shortest_path/', include('shortest_path.urls', namespace='shortest_path')),
 )

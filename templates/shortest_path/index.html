@@ -1,1 +1,16 @@
+{% extends "shortest_path/base.html" %}
+
+{% block title %}
+  Mapas
+{% endblock %}
+
+{% block body_block %}
+
 <h1>Shortest Path</h1>
+
+<ul>
+	<li><a href="/shortest_path/create_map/">Criar Mapa</a></li>
+	<li><a href="/shortest_path/maps/">Ver menor percurso</a></li>
+</ul>
+
+{% endblock %}

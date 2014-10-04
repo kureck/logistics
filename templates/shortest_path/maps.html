@@ -1,0 +1,26 @@
+{% extends "shortest_path/base.html" %}
+
+{% block title %}
+  Mapas
+{% endblock %}
+
+{% block body_block %}
+<div class="jumbotron">
+  <h1>Mapas</h1>
+</div>
+  <ul>
+    <li><a href="/shortest_path/create_map/">Criar Mapa</a></li>
+  </ul>
+  {% if maps %}
+    <table class="table table-hover table-bordered .table-condensed">
+      <thead>
+        <th>Nome</th>
+      </thead>
+      {% for map in maps %}
+        <tr>
+          <td><a href="/shortest_path/maps/{{ map.id }}">{{ map.title }}</a></td>
+        </tr>
+      {% endfor %}
+    </table>
+  {% endif %}
+{% endblock %}
