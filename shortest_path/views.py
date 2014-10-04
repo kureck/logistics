@@ -67,7 +67,7 @@ def find_shortest_path(request, pk):
 		map_directions = road_map.direction_set.all()
 		origins = map_directions.values_list('origin', flat=True)
 		destinations = map_directions.values_list('destination', flat=True)
-		context_dict = { 'road_map' : road_map, 'map_directions' : map_directions }
+		context_dict = { 'road_map' : road_map, 'map_directions' : map_directions, 'origins' : origins, 'destinations' :destinations }
 	except RoadMap.DoesNotExist:
 		raise Http404
 	return render_to_response('shortest_path/find_shortest_path.html', context_dict, context)

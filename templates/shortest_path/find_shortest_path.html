@@ -9,19 +9,18 @@
   <h1>{{ road_map.name }}</h1>
 </div>
   {% if map_directions %}
-    <table class="table table-hover table-bordered .table-condensed">
-      <thead>
-        <th>Origem</th>
-        <th>Destino</th>
-        <th>km</th>
-      </thead>
-      {% for map_direction in map_directions %}
-        <tr>
-          <td>{{ map_direction.origin }}</td>
-          <td>{{ map_direction.destination }}</td>
-          <td>{{ map_direction.weight }}</td>
-        </tr>
+    <select name='origins'>
+      <option value='' selected>Origem</option>
+      {% for origin in origins  %}
+        <option value='{{ origin }}' >{{ origin }}</option>
       {% endfor %}
-    </table>
+    </select>
+
+    <select name='destinations'>
+      <option value='' selected>Destino</option>
+      {% for destination in destinations  %}
+        <option value='{{ destination }}'>{{ destination }}</option>
+      {% endfor %}
+    </select>
   {% endif %}
 {% endblock %}
