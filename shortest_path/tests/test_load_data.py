@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from shortest_path.lib.load_data import LoadData
 
-CORRECT_VALUE = [{'origin': u'A', 'destiny': u'B', 'weight': 10.0}, {'origin': u'B', 'destiny': u'D', 'weight': 11.0}, {'origin': u'E', 'destiny': u'A', 'weight': 12.0}]
+CORRECT_VALUE = [{'origin': u'A', 'destination': u'B', 'weight': 10.0}, {'origin': u'B', 'destination': u'D', 'weight': 11.0}, {'origin': u'E', 'destination': u'A', 'weight': 12.0}]
 
 def test_load_data_from_text_field_empty():
     ld = LoadData()

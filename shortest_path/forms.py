@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django import forms
-from .models import RoadMap
+from .models import RoadMap, Direction
 
 class RoadMapForm(forms.ModelForm):
     name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=128, label="Nome")

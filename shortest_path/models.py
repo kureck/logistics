@@ -11,5 +11,8 @@ class RoadMap(models.Model):
 class Direction(models.Model):
 	road_map = models.ForeignKey(RoadMap)
 	origin = models.CharField(max_length=128)
-	destiny = models.CharField(max_length=128)
+	destination = models.CharField(max_length=128)
 	weight = models.FloatField()
+
+	def __unicode__(self):
+		self.road_map
