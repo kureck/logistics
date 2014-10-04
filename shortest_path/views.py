@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from .models import RoadMap
+from .models import RoadMap, Direction
 from .forms import RoadMapForm
+from .lib.load_data import LoadData
 import ipdb
 
 def index(request):
@@ -19,10 +20,28 @@ def maps(request):
 def create_map(request):
 	context = RequestContext(request)
 	if request.method == 'POST':
-		form = RoadMapForm(request.POST)
+		form = RoadMapForm(request.POST, request.FILES)
 		if form.is_valid():
+			ld = LoadData()
 			# ipdb.set_trace()
-			form.save(commit=True)
+			if form.data['text']:
+				collection_list = ld.load_data_from_text_field(form.data['text'])
+				road_map = form.save(commit=True)
+				for direction in collection_list:
+					origin = direction['origin']
+					destiny = direction['destiny']
+					weight = direction['weight']
+					Direction.objects.create(road_map=road_map, origin=origin, destiny=destiny, weight=weight)
+			elif form.files:
+				collection_list = ld.load_data_from_csv(form.files['csv_file'])
+				road_map = form.save(commit=True)
+				for direction in collection_list:
+					origin = direction['origin']
+					destiny = direction['destiny']
+					weight = direction['weight']
+					Direction.objects.create(road_map=road_map, origin=origin, destiny=destiny, weight=weight)
+			else:
+				form.save(commit=True)
 			return maps(request)
 		else:
 			print form.errors

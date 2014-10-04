@@ -9,7 +9,7 @@
   <h1>Criar Mapa</h1>
 </div>
   <div class="container">
-    <form class="span6" id="family_form" method="post" action="/shortest_path/create_map/">
+    <form class="span6" id="family_form" method="post" action="/shortest_path/create_map/" enctype="multipart/form-data">
       {% csrf_token %}
       {% for field in form.visible_fields %}
         {{ field.errors }}
