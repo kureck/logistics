@@ -9,6 +9,9 @@
   <h1>{{ road_map.name }}</h1>
 </div>
   {% if map_directions %}
+  <form class="span6" id="family_form" method="post" action="/shortest_path/find_shortest_path/">
+      {% csrf_token %}
+      <input type='hidden' name='road_map' value='{{ road_map.id }}'>
     <select name='origins'>
       <option value='' selected>Origem</option>
       {% for origin in origins  %}
@@ -22,5 +25,13 @@
         <option value='{{ destination }}'>{{ destination }}</option>
       {% endfor %}
     </select>
+    <br/>
+    <label>Valor do Litro</label>
+    <input class="form-control" id="litro" maxlength="128" name="litro" type="text">
+    <br/>
+    <label>Autonomia</label>
+    <input class="form-control" id="autonomia" maxlength="128" name="autonomia" type="text">
+    <button class="btn btn-default btn-primary" type="submit" name="submit">Calcular</button>
+  </form>
   {% endif %}
 {% endblock %}

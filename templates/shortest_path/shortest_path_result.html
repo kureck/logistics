@@ -1,0 +1,12 @@
+{% extends "shortest_path/base.html" %}
+
+{% block title %}
+  Resultado do melhor caminho para o Mapa: {{ road_map.name }}
+{% endblock %}
+
+{% block body_block %}
+<div class="jumbotron">
+  <h1>{{ road_map.name }}</h1>
+</div>
+<p>{{ shortest_path_value }}</p>
+{% endblock %}

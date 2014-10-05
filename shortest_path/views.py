@@ -2,6 +2,7 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import Http404
+import networkx as nx
 from .models import RoadMap, Direction
 from .forms import RoadMapForm
 from .lib.load_data import LoadData
@@ -34,7 +35,6 @@ def create_map(request):
 		form = RoadMapForm(request.POST, request.FILES)
 		if form.is_valid():
 			ld = LoadData()
-			# ipdb.set_trace()
 			if form.data['text']:
 				collection_list = ld.load_data_from_text_field(form.data['text'])
 				road_map = form.save(commit=True)
@@ -60,14 +60,32 @@ def create_map(request):
 		form = RoadMapForm()
 	return render_to_response('shortest_path/create_map.html', { 'form' : form }, context)
 
-def find_shortest_path(request, pk):
+def find_shortest_path_input(request, pk):
 	context = RequestContext(request)
 	try:
 		road_map = RoadMap.objects.get(pk=pk)
 		map_directions = road_map.direction_set.all()
-		origins = map_directions.values_list('origin', flat=True)
-		destinations = map_directions.values_list('destination', flat=True)
+		origins = set(map_directions.values_list('origin', flat=True))
+		destinations = set(map_directions.values_list('destination', flat=True))
 		context_dict = { 'road_map' : road_map, 'map_directions' : map_directions, 'origins' : origins, 'destinations' :destinations }
 	except RoadMap.DoesNotExist:
 		raise Http404
 	return render_to_response('shortest_path/find_shortest_path.html', context_dict, context)
+
+def find_shortest_path(request):
+	context = RequestContext(request)
+	context_dict = {}
+	if request.method == 'POST':
+		map_id = request.POST['road_map']
+		origin = request.POST['origins']
+		destination = request.POST['destinations']
+		road_map = RoadMap.objects.get(id=map_id)
+		map_directions = road_map.direction_set.all()
+		g = nx.Graph()
+		for direction in map_directions:
+			g.add_edge(direction.origin, direction.destination, weight=direction.weight)
+		shortest_path_value = nx.dijkstra_path_length(g, origin, destination, 'weight')
+		litro = float(request.POST['litro'])
+		autonomia = float(request.POST['autonomia'])
+		context_dict['shortest_path_value'] = shortest_path_value*litro/autonomia
+	return render_to_response('shortest_path/shortest_path_result.html', context_dict, context)
