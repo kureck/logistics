@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Django settings for logistics project.
 
@@ -18,6 +19,7 @@ PROJECT_PATH = os.path.abspath(PROJECT_PATH)
 TEMPLATE_PATH = os.path.join(PROJECT_PATH, 'templates')
 STATIC_PATH = os.path.join(PROJECT_PATH, 'static')
 
+DATABASE_PATH = os.path.join(PROJECT_PATH, 'logistics.db')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -70,16 +72,31 @@ WSGI_APPLICATION = 'logistics.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'logistics',
-        'USER': 'logistic',
-        'PASSWORD': '1oG!$tic',
-        'HOST': ''
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': DATABASE_PATH,                      # Or path to database file if using sqlite3.
+        # The following settings are not used with sqlite3:
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': '',                      # Set to empty string for default.
     }
 }
-import dj_database_url
 
-DATABASES['default'] = dj_database_url.config(default='postgres://logistic:1oG!$tic@localhost/logistics')
+## Descomente o trecho abaixo caso queira usar o postgresql
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'logistics',
+#         'USER': 'logistic',
+#         'PASSWORD': '1oG!$tic',
+#         'HOST': ''
+#     }
+# }
+# import dj_database_url
+# DATABASES['default'] = dj_database_url.config(default='postgres://logistic:1oG!$tic@localhost/logistics')
+
+## -- Até aqui
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/

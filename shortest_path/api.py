@@ -18,10 +18,10 @@ class RoadMapResource(ModelResource):
         response = {}
         if request.body:
             params = json.loads(request.body)
-            map_id = params['road_map']
+            map_name = params['road_map_name']
             origin = params['origin']
             destination = params['destination']
-            road_map = RoadMap.objects.get(id=map_id)
+            road_map = RoadMap.objects.get(name=map_name)
             map_directions = road_map.direction_set.all()
             g = Graph(map_directions)
             litro = float(params['litro'])
