@@ -70,6 +70,6 @@ Crie um mapa com um nome qualquer e as direções e distâncias abaixo
 
 No terminal use o seguinte comando:
 
-curl -i -H "Content-Type: application/json" -X POST -d '{"road_map_name":<nome-do-mapa>, "origin": "A", "destination":"D", "autonomia": 10, "litro":2.5 }' http://127.0.0.1:8000/shortest_path/api/map/find_shortest_path/
+curl -i -H "Content-Type: application/json" -X POST -d '{"road_map_name":nome_do_mapa, "origin": "A", "destination":"D", "autonomia": 10, "litro":2.5 }' http://127.0.0.1:8000/shortest_path/api/map/find_shortest_path/
 
 Nesse caso a resposta será em JSON: {"shortest_path": ["A", "B", "D"], "shortest_path_value": 6.25}
