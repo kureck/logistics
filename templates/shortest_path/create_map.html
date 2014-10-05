@@ -9,6 +9,13 @@
   <h1>Criar Mapa</h1>
 </div>
   <div class="container">
+    <p>O nome do mapa é único</p>
+    <p>Você pode criar o mapa de duas formas </p>
+    <ul>
+      <li>Usando o campo de texto diretamente nos formatos A B 10 ou A,B,10 com quebra de linha para cada tupla</li>
+      <li>fazendo o upload de um arquivo CSV sem header cuja primera coluna é origem, a segunda o destino e a terceira a distância</li>
+    </ul>
+    <p></p>
     <form class="span6" id="family_form" method="post" action="/shortest_path/create_map/" enctype="multipart/form-data">
       {% csrf_token %}
       {% for field in form.visible_fields %}

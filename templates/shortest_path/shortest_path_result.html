@@ -6,7 +6,16 @@
 
 {% block body_block %}
 <div class="jumbotron">
-  <h1>{{ road_map.name }}</h1>
+  <h1>Mapa: {{ road_map.name }}</h1>
 </div>
-<p>{{ shortest_path_value }}</p>
+<p><strong>Valor: </strong>{{ shortest_path_value }}</p>
+<p><strong>Menor caminho: </strong>
+    {% for paths in  shortest_path %}
+        {{ paths }}    
+    {% endfor %}
+</p>
+<p><strong>Origem: </strong>{{ values.origin }}</p>
+<p><strong>Destino: </strong>{{ values.destination }}</p>
+<p><strong>Autonomia: </strong>{{ values.autonomia }} km/litro</p>
+<p><strong>Valor do litro: </strong>R$ {{ values.litro }}</p>
 {% endblock %}

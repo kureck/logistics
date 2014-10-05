@@ -6,7 +6,6 @@ from .models import RoadMap, Direction
 from .forms import RoadMapForm
 from .lib.load_data import LoadData
 from .lib.graph import Graph
-import ipdb
 
 def index(request):
 	context = RequestContext(request)
@@ -82,9 +81,11 @@ def find_shortest_path(request):
 		road_map = RoadMap.objects.get(id=map_id)
 		map_directions = road_map.direction_set.all()
 		g = Graph(map_directions)
-		litro = float(request.POST['litro'])
-		autonomia = float(request.POST['autonomia'])
+		litro = float(request.POST['litro'].replace(',','.'))
+		autonomia = float(request.POST['autonomia'].replace(',','.'))
 		shortest_path_value = g.shortest_path_result(origin, destination, autonomia, litro)
+		context_dict['road_map'] = road_map
+		context_dict['values'] = { 'origin': origin, 'destination': destination, 'autonomia': autonomia, 'litro': litro }
 		context_dict['shortest_path_value'] = shortest_path_value['shortest_path_value']
 		context_dict['shortest_path'] = shortest_path_value['shortest_path']
 	return render_to_response('shortest_path/shortest_path_result.html', context_dict, context)

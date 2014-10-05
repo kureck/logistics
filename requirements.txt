@@ -1,0 +1,17 @@
+Django==1.6.6
+SQLAlchemy==0.9.7
+dj-database-url==0.3.0
+dj-static==0.0.6
+django-leaflet==0.14.1
+django-tastypie==0.12.0
+django-template-debug==0.3.3
+ipdb==0.8
+ipython==2.1.0
+networkx==1.9.1
+psycopg2==2.4.5
+py==1.4.24
+pytest==2.6.2
+simplejson==3.6.4
+virtualenv==1.11.6
+w3lib==1.8.0
+wsgi-intercept==0.5.1
