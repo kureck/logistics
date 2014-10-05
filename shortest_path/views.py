@@ -2,10 +2,10 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import Http404
-import networkx as nx
 from .models import RoadMap, Direction
 from .forms import RoadMapForm
 from .lib.load_data import LoadData
+from .lib.graph import Graph
 import ipdb
 
 def index(request):
@@ -81,11 +81,10 @@ def find_shortest_path(request):
 		destination = request.POST['destinations']
 		road_map = RoadMap.objects.get(id=map_id)
 		map_directions = road_map.direction_set.all()
-		g = nx.Graph()
-		for direction in map_directions:
-			g.add_edge(direction.origin, direction.destination, weight=direction.weight)
-		shortest_path_value = nx.dijkstra_path_length(g, origin, destination, 'weight')
+		g = Graph(map_directions)
 		litro = float(request.POST['litro'])
 		autonomia = float(request.POST['autonomia'])
-		context_dict['shortest_path_value'] = shortest_path_value*litro/autonomia
+		shortest_path_value = g.shortest_path_result(origin, destination, autonomia, litro)
+		context_dict['shortest_path_value'] = shortest_path_value['shortest_path_value']
+		context_dict['shortest_path'] = shortest_path_value['shortest_path']
 	return render_to_response('shortest_path/shortest_path_result.html', context_dict, context)
