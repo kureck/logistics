@@ -73,3 +73,11 @@ No terminal use o seguinte comando:
 curl -i -H "Content-Type: application/json" -X POST -d '{"road_map_name":nome_do_mapa, "origin": "A", "destination":"D", "autonomia": 10, "litro":2.5 }' http://127.0.0.1:8000/shortest_path/api/map/find_shortest_path/
 
 Nesse caso a resposta será em JSON: {"shortest_path": ["A", "B", "D"], "shortest_path_value": 6.25}
+
+## Motivação
+
+Para o desenvolvimento da aplicação foi utilizado o framework Django e para o banco de dados, inicialmente, foi usado o PostgreSQL, mas para ajudar a instalação mais rápida do sistema o SQLite foi usado. Entretanto, é possível usar o PostgreSQL ao descomentar o trecho do arquivo settings.py referente à configuração do banco. A utilização do SQLite deixa a carga dos dados bem mais lenta do que usando o Postgres. 
+
+O problema para encontrar o menor caminho foi resolvido usando o algoritmo de [Dijkstra](http://en.wikipedia.org/wiki/Dijkstra's_algorithm) que acompanha o pacote [NetworkX](http://networkx.github.io/).
+
+A utilização de um banco de dados relacional para atender um problema em que a estrutura do problema é um grafo talvez não seja a melhor solução. O uso de um banco de dados em grafo como [Neo4J](http://www.neo4j.org/) talvez traga resultados mais ricos caso a complexidade de consulta em grafos seja necessário.
