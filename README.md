@@ -58,14 +58,15 @@ Para usar o webservice basta fazer um request via POST passando os parâmetros:
 Exemplo:
 
 Para o grafo:
+
 | origem | destino | distância |
 | ------ | ------- | --------- |
-|   A    |    B    |     10    |
-|   B    |    D    |     15    |
-|   A    |    C    |     20    |
-|   C    |    D    |     30    |
-|   B    |    E    |     50    |
-|   D    |    E    |     30    |
+| A | B | 10 |
+| B | D | 15 |
+| A | C | 20 |
+| C | D | 30 |
+| B | E | 50 |
+| D | E | 30 |
 
 curl -i -H "Content-Type: application/json" -X POST -d '{"road_map_name":"Ção Ção", "origin": "A", "destination":"D", "autonomia": 10, "litro":2.5 }' http://127.0.0.1:8000/shortest_path/api/map/find_shortest_path/
 
